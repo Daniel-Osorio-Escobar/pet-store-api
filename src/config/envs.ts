@@ -7,5 +7,3 @@ export const envs = {
 
     PORT: get('PORT').required().asPortNumber(),
 }
-
-export * from './envs';
