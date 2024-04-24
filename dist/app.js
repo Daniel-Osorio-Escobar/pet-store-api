@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const envs_1 = require("./config/envs");
-const routes_1 = require("./presentation/routes"); //1
+const router_1 = require("./presentation/router"); //1
 const server_1 = require("./presentation/server");
 (() => {
     main();
@@ -21,7 +21,7 @@ function main() {
         // todo: inicio de nuestro server
         new server_1.Server({
             port: envs_1.envs.PORT,
-            routes: routes_1.AppRoutes.routes //2
+            routes: router_1.AppRoutes.routes //2
         }).start();
     });
 }
