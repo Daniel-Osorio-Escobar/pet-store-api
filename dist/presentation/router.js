@@ -1,14 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppRoutes = void 0;
-const express_1 = require("express"); // 2
-const router_1 = require("./auth/router"); //6
+const express_1 = require("express");
+const controller_1 = require("./auth/controller"); // 1
+const infraestructure_1 = require("../infraestructure"); // 5
 class AppRoutes {
     static get routes() {
-        const router = (0, express_1.Router)(); //4
-        // Definir todas mis rutas principales
-        router.use('/api/auth', router_1.AuthRoutes.routes); // 7
-        return router; //5
+        const router = (0, express_1.Router)();
+        const datasource = new infraestructure_1.AuthDataSourceImpl(); //6
+        const AuthRepository = new infraestructure_1.AuthRepositoryImpl(datasource); //7
+        const controller = new controller_1.AuthController(AuthRepository); // 2 // 8 actulizacion
+        // Definir todas mis rutas especificas
+        router.post('/login', controller.loginUser); // 3
+        router.post('/register', controller.registerUser); // 4
+        return router;
     }
 }
 exports.AppRoutes = AppRoutes;
